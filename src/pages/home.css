@@ -1,0 +1,54 @@
+.containerWrapper {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.container > div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.heading {
+    color: #333;
+}
+
+.input_repo {
+    display: block;
+    padding: 10px;
+    margin: 10px auto;
+    width: 220px;
+    font-size: 16px;
+}
+
+
+
+.show_profile {
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.show_profile:hover {
+    background-color: #45a049;
+}
+
