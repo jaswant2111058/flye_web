@@ -5,8 +5,8 @@ import { useData } from '../Hooks/apiHooks';
 
 const ProfileView = ({ name, bio, html_url, avatar_url, location }) => {
 
-    const { perPage,setPerPage,results } = useData();
-    
+    const { perPage, setPerPage, results, isLoading } = useData();
+
 
     return (
         <div>
@@ -20,8 +20,8 @@ const ProfileView = ({ name, bio, html_url, avatar_url, location }) => {
                             <h2>{name}</h2>
                             <p className="bio">{bio ? bio : "No Bio"}</p>
                             <p className="location">{location ? location : "No location"}</p>
-                            <div className={"socialLinks"}>
-                                GitHub : {html_url}
+                            <div className="socialLinks">
+                                <a href={html_url}> GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -32,10 +32,12 @@ const ProfileView = ({ name, bio, html_url, avatar_url, location }) => {
                         <button className="add" onClick={() => { setPerPage(perPage + 1) }}>+</button>
                     </div>
                 </div>
+
                 <div className='repo-data'>
-                    {results.map((repo, index) => (
+                    {isLoading ? (<img src='./images/loadin_gif.gif' alt='Loading....' />) : (results.map((repo, index) => (
                         <RepoCard key={index} {...repo} />
-                    ))}
+                    )))}
+
                 </div>
             </div>
         </div>

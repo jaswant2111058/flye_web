@@ -28,12 +28,16 @@ export const DataProvider = ({ children }) => {
     useEffect(() => {
         const getData = async () => {
             try {
+                startLoading()
                 const response = await axios.get(`${baseURL}/${user}`);
                 if (response) {
                     setProfileData(response?.data);
+                    stopLoading()
                 }
             } catch (error) {
                 console.error('Error searching:', error);
+            }finally {
+                stopLoading();
             }
         };
         if (user) getData();

@@ -35,7 +35,7 @@
     color: #777;
 }
 
-.social-links a {
+.socialLinks a {
     display: inline-block;
     padding: 5px 10px;
     margin-top: 10px;
@@ -44,6 +44,7 @@
     text-decoration: none;
     border-radius: 5px;
     cursor: pointer;
+    background-color:#4caf50 ;
 }
 
 .social-links a.github {
@@ -69,6 +70,14 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+.repo-data>img{
+
+    margin-top: 100px;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 100px;
+
 }
 
 .subtract,.add{
