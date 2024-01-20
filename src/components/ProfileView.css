@@ -1,0 +1,96 @@
+.profile-details-wrapper {
+    display: flex;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    justify-content: space-evenly;
+}
+
+.profile-details {
+    display: flex;
+    gap: 50px;
+    text-align: center;
+    padding: 20px;
+}
+
+.profile-data {
+
+    margin-top: 50px;
+
+}
+
+.profile-image img {
+    width: 200px;
+    /* Adjust as needed */
+    border-radius: 50%;
+}
+
+.bio {
+    color: #333;
+}
+
+.location {
+    margin-top: 10px;
+    color: #777;
+}
+
+.social-links a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.social-links a.github {
+    background-color: #24292e;
+    /* GitHub color */
+}
+
+.social-links a.linkedin {
+    background-color: #0077b5;
+    /* LinkedIn color */
+}
+
+.social-links a.twitter {
+    background-color: #1da1f2;
+    /* Twitter color */
+}
+
+.social-links a:hover {
+    opacity: 0.8;
+}
+
+.repo-data {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.subtract,.add{
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+
+}
+.subtract{
+    margin-left: 20px;
+}
+.perPage::-webkit-inner-spin-button,.perPage::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+.perPage{
+    font-size: 20px;
+    width: 40px;
+    height: 30px;
+    text-align: center;
+}
+.repoPerPage{
+    display: flex;
+    align-items: center;
+
+}
