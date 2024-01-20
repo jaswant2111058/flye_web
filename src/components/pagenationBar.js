@@ -15,9 +15,8 @@ const PaginationBar = ({ repoCount, perPage }) => {
     };
 
     const handleNext = () => {
-        if (currentPage < 10) {
+       
             setCurrentPage(currentPage + 1);
-        }
     };
 
 
@@ -34,7 +33,7 @@ const PaginationBar = ({ repoCount, perPage }) => {
                 Prev
             </button>
             <div className='NUM_BTN'>
-                <button onClick={()=>{setPaginationNum(paginationNum-1)}}>{"<<"}</button>
+                <button onClick={()=>{setPaginationNum(paginationNum-1)}} disabled={paginationNum === 0} >{"<<"}</button>
                 {[...Array(repoCount % perPage === 0 ? Math.floor(repoCount / perPage) : Math.floor(repoCount / perPage) + 1)]?.map((_, index) => {
 
                     if (index >= paginationNum * 10 && index < 10 * (paginationNum +1) ) {
@@ -46,7 +45,7 @@ const PaginationBar = ({ repoCount, perPage }) => {
                     }
 
                 })}
-                <button onClick={()=>{setPaginationNum(paginationNum+1)}}>{">>"}</button>
+                <button onClick={()=>{setPaginationNum(paginationNum+1)}}  disabled={paginationNum   === ((repoCount % perPage)%10 === 0 ? Math.floor((repoCount / perPage)/10) : Math.floor((repoCount / perPage)/10) + 1)}>{">>"}</button>
             </div>
             <button className='navBTN' onClick={handleNext} disabled={currentPage === (repoCount % perPage === 0 ? Math.floor(repoCount / perPage) : Math.floor(repoCount / perPage) + 1)}>
                 Next

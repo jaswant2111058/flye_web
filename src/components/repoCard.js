@@ -21,14 +21,14 @@ const RepoCard = ({ name, description, languages_url }) => {
 
   return (
     <div className="repoCard">
-      <h3 className="repoName">{name}</h3>
+      <h3 className="repoName">{name?.length > 20 ? `${name?.slice(0, 20)}...` : name?name:"No Name"}</h3>
       <p className="description">{description?.length > 30 ? `${description?.slice(0, 30)}...` : description?description:"No Description"}</p>
       <div className='languages_wrapper'>
         {
-          Object.keys(languages).map((item) => {
+          Object.keys(languages).map((item,index) => {
             return (
               <>
-                <div className="languages">
+                <div className="languages" key={index}>
                   {item}
                 </div>
               </>
