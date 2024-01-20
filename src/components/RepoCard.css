@@ -25,10 +25,17 @@
     padding: 5px 10px;
     border-radius: 5px;
   }
+  .languages_wrapper{
+    overflow-x: scroll;
+  }
 
 .repoCard >div{
 
     display: flex;
     gap:10px   
 }
-  
+ 
+
+.languages_wrapper::-webkit-scrollbar {
+  display: none;
+}

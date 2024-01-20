@@ -4,7 +4,7 @@ import { useData } from '../Hooks/apiHooks';
 
 
 
-const PaginationBar = ({ repoCount, PerPage }) => {
+const PaginationBar = ({ repoCount, perPage }) => {
     const { currentPage, setCurrentPage } = useData();
     const [paginationNum, setPaginationNum] = useState(0);
 
@@ -20,6 +20,8 @@ const PaginationBar = ({ repoCount, PerPage }) => {
         }
     };
 
+
+
     const handlePageClick = (page) => {
         setCurrentPage(page);
     };
@@ -33,7 +35,7 @@ const PaginationBar = ({ repoCount, PerPage }) => {
             </button>
             <div className='NUM_BTN'>
                 <button onClick={()=>{setPaginationNum(paginationNum-1)}}>{"<<"}</button>
-                {[...Array(repoCount % PerPage === 0 ? Math.floor(repoCount / PerPage) : Math.floor(repoCount / PerPage) + 1)].map((_, index) => {
+                {[...Array(repoCount % perPage === 0 ? Math.floor(repoCount / perPage) : Math.floor(repoCount / perPage) + 1)]?.map((_, index) => {
 
                     if (index >= paginationNum * 10 && index < 10 * (paginationNum +1) ) {
                         return (
@@ -42,10 +44,11 @@ const PaginationBar = ({ repoCount, PerPage }) => {
                             </button>
                         )
                     }
+
                 })}
                 <button onClick={()=>{setPaginationNum(paginationNum+1)}}>{">>"}</button>
             </div>
-            <button className='navBTN' onClick={handleNext} disabled={currentPage === 10}>
+            <button className='navBTN' onClick={handleNext} disabled={currentPage === (repoCount % perPage === 0 ? Math.floor(repoCount / perPage) : Math.floor(repoCount / perPage) + 1)}>
                 Next
             </button>
         </div>

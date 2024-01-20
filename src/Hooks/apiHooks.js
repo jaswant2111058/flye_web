@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+
 const DateContext = createContext();
 
 export const useData = () => {
@@ -7,14 +8,15 @@ export const useData = () => {
 };
 
 export const DataProvider = ({ children }) => {
-
     const [results, setResults] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [PerPage, setPerPage] = useState(10);
-    const [profileData, setProfileData] = useState({})
-    const [user, setUser] = useState("")
-    const baseURL = "https://api.github.com/users"
+    const [perPage, setPerPage] = useState(10);
+    const [profileData, setProfileData] = useState({});
+    const [user, setUser] = useState("");
+    const baseURL = "https://api.github.com/users";
+    let cancelTokenSource;
+
     const startLoading = () => {
         setLoading(true);
     };
@@ -34,42 +36,63 @@ export const DataProvider = ({ children }) => {
                 console.error('Error searching:', error);
             }
         };
-        getData();
+        if (user) getData();
 
     }, [user]);
 
 
+
     useEffect(() => {
-        const reposDate = async () => {
+        const reposData = async () => {
+            startLoading();
             try {
-                const response = await axios.get(`${baseURL}/${user}/repos?page=${currentPage}&per_page=${PerPage}`);
+                if (cancelTokenSource) {
+                    cancelTokenSource.cancel("Request canceled due to page change");
+                }
+                cancelTokenSource = axios.CancelToken.source();
+                const response = await axios.get(
+                    `${baseURL}/${user}/repos?page=${currentPage}&per_page=${perPage}`,
+                    {
+                        cancelToken: cancelTokenSource.token,
+                    }
+                );
                 if (response) {
                     setResults(response?.data);
                 }
             } catch (error) {
-                console.error('Error searching:', error);
+                if (axios.isCancel(error)) {
+                    console.log("Previous request canceled:", error.message);
+                } else {
+                    console.error('Error searching:', error);
+                }
+            } finally {
+                stopLoading();
             }
         };
-        reposDate();
 
-    }, [user]);
+        if (user) reposData();
 
-
-
-
+        return () => {
+            if (cancelTokenSource) {
+                cancelTokenSource.cancel("Component unmounted");
+            }
+        };
+    }, [user, currentPage, perPage]);
 
     return (
-        <DateContext.Provider value={{
-            results,
-            profileData,
-            isLoading,
-            user,
-            setUser,
-            PerPage,
-            setPerPage,
-            currentPage,
-            setCurrentPage
-        }}>
+        <DateContext.Provider
+            value={{
+                results,
+                profileData,
+                isLoading,
+                user,
+                setUser,
+                perPage,
+                setPerPage,
+                currentPage,
+                setCurrentPage,
+            }}
+        >
             {children}
         </DateContext.Provider>
     );
